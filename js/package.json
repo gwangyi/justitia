@@ -1,0 +1,31 @@
+{
+  "name": "justitia",
+  "version": "0.1.0",
+  "description": "Test suite widget for jupyter notebook",
+  "author": "Sungkwang Lee",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gwangyi/justitia.git"
+  },
+  "keywords": [
+    "jupyter",
+    "widgets",
+    "ipython",
+    "ipywidgets"
+  ],
+  "scripts": {
+    "prepublish": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.4",
+    "json-loader": "^0.5.4",
+    "style-loader": "^0.18.2",
+    "webpack": "^1.12.14"
+  },
+  "dependencies": {
+    "jupyter-js-widgets": "^2.1.4",
+    "underscore": "^1.8.3"
+  }
+}
