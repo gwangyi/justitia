@@ -14,19 +14,11 @@ function addOutputArea(model, selector) {
             resolve(area);
         }
 
-        if (requirejs.defined("notebook/js/outputarea")) {
-            // Notebook 4.x
-            requirejs(["notebook/js/outputarea"], renderOutput)
-        } else {
-            // Notebook 5.x
-            requirejs(["notebook"], function(notebookApp) {
-                var outputArea = notebookApp["notebook/js/outputarea"];
-                renderOutput(outputArea);
-            });
-        } 
+        requirejs(["notebook/js/outputarea"], renderOutput);
     });
 }
 
 module.exports = {
+    version: '0.1.3',
     addOutputArea : addOutputArea
 };

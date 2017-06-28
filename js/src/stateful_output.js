@@ -27,15 +27,15 @@ var StatefulOutputModel = widgets.DOMWidgetModel.extend({
         _view_name : 'StatefulOutputView',
         _model_module : 'justitia',
         _view_module : 'justitia',
-        _model_module_version : '0.1.0',
-        _view_module_version : '0.1.0',
+        _model_module_version : _common.version,
+        _view_module_version : _common.version,
         msg_id: "",
         outputs : [],
     }),
 
     initialize: function() {
         StatefulOutputModel.__super__.initialize.apply(this, arguments);
-        this.kernel = this.comm.kernel;
+        this.kernel = this.comm && this.comm.kernel;
         this.listenTo(this, 'change:msg_id', this.reset_msg_id);
         if (this.kernel) {
             this.kernel.set_callbacks_for_msg(this.id, this.callbacks(), false);
@@ -64,7 +64,7 @@ var StatefulOutputModel = widgets.DOMWidgetModel.extend({
     },
 
     callbacks: function() {
-        var cb = widgets.OutputModel.__super__.callbacks.apply(this);
+        var cb = StatefulOutputModel.__super__.callbacks.apply(this);
         var iopub = cb.iopub || {};
         var iopubCallbacks = _.extend({}, iopub, {
             output: function(msg) {
@@ -99,7 +99,7 @@ var StatefulOutputModel = widgets.DOMWidgetModel.extend({
 
 
 // Custom View. Renders the widget model.
-var StatefulOutputView = widgets.OutputView.extend({
+var StatefulOutputView = widgets.DOMWidgetView.extend({
     render: function() {
         var this_ = this;
         addOutputArea(this.model, this.el).then(function(output_area) {
